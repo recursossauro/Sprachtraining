@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # libs
     'widget_tweaks',
     # Module
-    'base',
+    'Basis',
 ]
 
 MIDDLEWARE = [
