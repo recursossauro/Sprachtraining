@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     # Module
     'Basis',
+    'Zugriff',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# AUTH
+
+AUTH_USER_MODEL = 'Zugriff.User'
+LOGIN_URL = 'Zugriff:login'
+LOGIN_REDIRECT_URL = 'index'

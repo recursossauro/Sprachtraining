@@ -46,10 +46,24 @@
       </li>
     </ul>
     <div class="nav-item">
-        <a id="login" class="nav-link" href="#"><span class="glyphicon glyphicon-log-out"></span>Entrar</a>
+  {% if user.is_authenticated %}
+        <span class="nav-brand glyphicon glyphicon-log-in">{{user}}</span>
+    </div>
+    <div class="">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Minha Conta</a>
+        </li>
+      </ul>
     </div>
     <div class="nav-item">
-        <a id="novousuario" class="nav-link" href="#"><span class="glyphicon glyphicon-log-out"></span>Novo</a>
+        <a id="logout" class="nav-link" href="#">Sair</a>
+  {% else %}
+        <a id="login" class="nav-link" href="{% url 'Zugriff:login' %}">Entrar</a>
+    </div>
+    <div class="nav-item">
+        <a id="novousuario" class="nav-link" href="#">Novo</a>
+      {% endif %}
     </div>
   </div>
 </nav>
