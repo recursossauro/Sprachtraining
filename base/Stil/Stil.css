@@ -1,0 +1,47 @@
+body {
+  background-image: url('../bilder/Hintergrund.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  /*background-attachment: fixed;*/
+  background-color: #f0e3c6;
+  color: #2b2414;
+}
+
+body a {
+  color: #690500;
+}
+
+.jumbotron {
+  background: none;
+  color: #2b2414;
+}
+
+nav {
+  background-color: #2b2414;
+  color: #f0e3c6;
+}
+
+nav a {
+    color: #56a3a6;
+}
+
+header {
+  background-color: #2b2414;
+  color: #a78314;
+}
+
+header h1, h2 {
+  text-align: center;
+}
+
+/*
+Cores
+  #f0e3c6 Bege clarinho
+  #2b2414 Marrom escuro
+  #a78314 Mostarda;
+  #2e0f15 Sienna Escuro
+  #690500 Sienna
+  #57737a Chumbo
+
+  #56a3a6 Azul pscina fosco;
+*/
