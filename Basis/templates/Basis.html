@@ -57,7 +57,7 @@
       </ul>
     </div>
     <div class="nav-item">
-        <a id="logout" class="nav-link" href="#">Sair</a>
+        <a id="logout" class="nav-link" href="{% url 'Zugriff:logout' %}">Sair</a>
   {% else %}
         <a id="login" class="nav-link" href="{% url 'Zugriff:login' %}">Entrar</a>
     </div>
