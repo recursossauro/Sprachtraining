@@ -130,3 +130,8 @@ AUTH_USER_MODEL = 'Zugriff.User'
 LOGIN_URL = 'Zugriff:login'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_URL = 'Zugriff:logout'
+AUTH_USER_MODEL = 'Zugriff.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'Zugriff.backends.ModelBackend',
+)
