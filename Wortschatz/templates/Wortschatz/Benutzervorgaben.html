@@ -1,0 +1,14 @@
+{% extends "Wortschatz/Benutzervorgabenindex.html" %}
+
+{% block Titel %}{{ block.super }} - Preferências do Usuário{% endblock %}
+
+{% block Wortschatz_Inhalt %}
+<header>
+  <h3>Preferências do Usuário</h3>
+</header>
+<section>
+  <p>Idioma conhecido: {{object.sprache}}
+  <p>Idioma de Treino: {{object.sprachetraining}}
+</section>
+
+{% endblock %}

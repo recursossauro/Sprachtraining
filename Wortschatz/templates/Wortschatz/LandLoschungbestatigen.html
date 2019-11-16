@@ -1,0 +1,30 @@
+{% extends "Wortschatz/index.html" %}
+
+{% load widget_tweaks %}
+
+{% block Titel %}Cadastro de Países{% endblock %}
+
+{% block Wortschatz_Inhalt %}
+<header>
+  <h3>Exclusão de País</h3>
+</header>
+<section>
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    {% endfor %}
+    <fieldset>
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <p>Confirma a exclusão do páis {{ object }}<br/>
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+          </div>
+        </div>
+    </fieldset>
+  </form>
+</section>
+
+{% endblock %}

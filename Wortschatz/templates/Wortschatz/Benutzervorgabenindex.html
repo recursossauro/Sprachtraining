@@ -1,0 +1,31 @@
+{% extends "Basis.html" %}
+
+{% block Titel %} {{ block.super }} - Vocabulário{% endblock %}
+
+{% block Inhalt %}
+<header>
+  <h2>Vocabulário</h2>
+</header>
+<article class="row">
+    <div class="col-md-4">
+        <div class="list-group">
+          <a href="{% url 'Wortschatz:Benutzervorgaben' %}" class="list-group-item active">Visualizar</a>
+          <a href="{% url 'Wortschatz:Benutzervorgabenechseln' %}" class="list-group-item active">Alterar</a>
+          <a href="{% url 'Wortschatz:index' %}" class="list-group-item active">Vocabulário</a>
+        </div>
+    </div>
+    <div class="col-md-8">
+      {% block mensagem %}
+       {% for mensagem in messages %}
+         <aside class="alert alert-{{ mensagem.tags }}">
+           {{ mensagem }}
+         </aside>
+       {% endfor %}
+      {% endblock %}
+
+      {% block Wortschatz_Inhalt %}
+
+      {% endblock %}
+    </div>
+</article>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "Wortschatz/index.html" %}
+
+{% block Titel %}{{ block.super }} - Idiomas{% endblock %}
+
+{% block Wortschatz_Inhalt %}
+<header>
+  <h3>Idiomas</h3>
+</header>
+<section>
+  <br/><a href=" {% url 'Wortschatz:neuesSprache' %} ">Novo Idioma</a>
+  {% if object_list %}
+    {% for Sprache in object_list %}
+      <br/><a href="{% url 'Wortschatz:Sprachewechseln' Sprache.slug %}">{{Sprache.slug}} - {{Sprache.name}}</a> <a href="{% url 'Wortschatz:Spracheloschen' Sprache.slug %}" class="btn btn-default" role="button">Excluir</a>
+    {% endfor %}
+  {% endif %}
+
+
+</section>
+
+{% endblock %}

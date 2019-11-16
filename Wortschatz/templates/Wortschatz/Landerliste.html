@@ -1,0 +1,20 @@
+{% extends "Wortschatz/index.html" %}
+
+{% block Titel %}{{ block.super }} - Cadastro de Países{% endblock %}
+
+{% block Wortschatz_Inhalt %}
+<header>
+  <h3>Cadastro de Países</h3>
+</header>
+<section>
+  <br/><a href=" {% url 'Wortschatz:neuesLand' %} ">Novo País</a>
+  {% if object_list %}
+    {% for Land in object_list %}
+      <br/><a href=" {% url 'Wortschatz:Landwechseln' Land.slug %} ">{{Land}}</a> <a href="{% url 'Wortschatz:LandLoschung' Land.slug %}" class="btn btn-default" role="button">Excluir</a>
+    {% endfor %}
+  {% endif %}
+
+
+</section>
+
+{% endblock %}

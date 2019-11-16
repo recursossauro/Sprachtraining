@@ -1,0 +1,23 @@
+{% extends "Basis.html" %}
+
+{% block Titel %} {{ block.super }} - Vocabulário{% endblock %}
+
+{% block Inhalt %}
+<header>
+  <h2>Vocabulário</h2>
+</header>
+<article class="row">
+    <div class="col-md-2">
+        <div class="list-group">
+          <a href="{% url 'Wortschatz:Vokabelliste' %}" class="list-group-item active">Vocabulário</a>
+          <a href="{% url 'Wortschatz:Landerliste' %}" class="list-group-item active">Países</a>
+          <a href="{% url 'Wortschatz:Sprachliste' %}" class="list-group-item active">Idiomas</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+      {% block Wortschatz_Inhalt %}
+
+      {% endblock %}
+    </div>
+</article>
+{% endblock %}

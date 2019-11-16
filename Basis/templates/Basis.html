@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <title>{% block Stil %}Projeto{% endblock %} </title>
+  <title>{% block Titel %}Treino de Idioma{% endblock %} </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
@@ -23,9 +23,8 @@
 <body>
 
 <div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>Projeto</h1>
-  <h2>Uma referência para criação de outros sistemas</h2>
-  <p>Alguma coisa</p>
+  <h1>Treino de Idioma</h1>
+  <h2></h2>
 </div>
 
 <nav class="navbar navbar-expand-sm navbar-dark">
@@ -41,12 +40,15 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>
+  {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href=" {% url 'Wortschatz:index' %} ">Vocabulário</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=" {% url 'Wortschatz:Benutzervorgabenechseln' %} ">Preferências</a>
       </li>
     </ul>
     <div class="nav-item">
-  {% if user.is_authenticated %}
         <span class="nav-brand glyphicon glyphicon-log-in">{{user}}</span>
     </div>
     <div class="">
@@ -59,16 +61,26 @@
     <div class="nav-item">
         <a id="logout" class="nav-link" href="{% url 'Zugriff:logout' %}">Sair</a>
   {% else %}
+    </ul>
+    <div class="nav-item">
         <a id="login" class="nav-link" href="{% url 'Zugriff:login' %}">Entrar</a>
     </div>
     <div class="nav-item">
         <a id="novousuario" class="nav-link" href="{% url 'Zugriff:neuerBenutzer' %}">Novo</a>
-      {% endif %}
+  {% endif %}
     </div>
   </div>
 </nav>
 
 <div class="container margin-top" style="margin-top:30px">
+ {% block mensagem %}
+  {% for mensagem in messages %}
+    <aside class="alert alert-{{ mensagem.tags }}">
+      {{ mensagem }}
+    </aside>
+  {% endfor %}
+ {% endblock %}
+
  {% block Inhalt %}
 
  {% endblock %}

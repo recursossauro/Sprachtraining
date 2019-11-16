@@ -1,0 +1,17 @@
+{% extends "Wortschatz/index.html" %}
+
+{% block Titel %}{{ block.super }} - Wocabulário{% endblock %}
+
+{% block Wortschatz_Inhalt %}
+<header>
+  <h3>Vocabulário</h3>
+</header>
+<section>
+  <picture class="">
+    {% if object.bild %}<img src="{{object.bild.url}}" alt="{{object.wort}}" style="max-width:100%;">{% endif %}
+  </picture>
+  <p>Palavra em{{object.sprachetraining}}: {{object.wort}}</p>
+  <p>Tradução: {{object.sprache}}: {{object.ubersetzung}}</p>
+</section>
+
+{% endblock %}

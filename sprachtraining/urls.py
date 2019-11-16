@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include 
+from django.conf.urls import url, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 from Basis import views
 
@@ -23,4 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('Zugriff/', include(('Zugriff.urls','Zugriff'), namespace='Zugriff')),
+    path('Wortschatz/', include(('Wortschatz.urls','Wortschatz'), namespace='Wortschatz')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
