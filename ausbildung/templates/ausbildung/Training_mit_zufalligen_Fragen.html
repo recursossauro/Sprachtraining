@@ -1,0 +1,66 @@
+{% extends "ausbildung/index.html" %}
+
+{% load widget_tweaks %}
+
+{% block Titel %}{{ block.super }} - Cadastro de Países{% endblock %}
+
+{% block ausbildung_Inhalt %}
+<header>
+  <h3>Perguntas</h3>
+</header>
+<section>
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    {% endfor %}
+    <fieldset>
+      {% for field in form.hidden_fields %}
+        {{ field }}
+      {% endfor %}
+      {% for field in form.visible_fields %}
+        <div class="form-group{% if field.errors %} has-error {% endif %}">
+          <label for="{{ field.auto_id }}" class="col-md-12 control-label">{{ Frage }}</label>
+          <div class="col-md-12">
+            {% render_field field class="form-control" %}
+            {% for error in field.errors %}
+              <span class="help-block">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+        <div class="form-group">
+          <div class="col-md-12 col-md-offset-3">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </div>
+        </div>
+    </fieldset>
+  </form>
+</section>
+<aside class="row {% if Antwort.ist_richtig %}.bg-success{% else %}.bg-danger{% endif %}">
+  <div class="col-md-6">
+    {{ Antwort.Fragetext }} {{ Antwort.Antwort }}
+  </div>
+  <div class="col-md-5">
+    tempo de resposta: {{ Antwort.Zeit }}
+  </div>
+  {% if Antwort.ist_richtig %}
+    <div class="col-md-4">
+      Correto!
+    </div>
+  {% else %}
+    <div class="col-md-3">
+      Errado!
+    </div>
+    <div class="col-md-3">
+      <b>Resposta certa:</b>
+    </div>
+    <div class="col-md-9">
+      {{ Antwort.Frage.Wortschatz.wort }} = {{ Antwort.Frage.Wortschatz.ubersetzung }}
+    </div>
+  {% endif %}
+</aside>
+
+{% endblock %}

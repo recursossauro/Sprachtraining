@@ -7,6 +7,7 @@ from django.views.generic import (
     DeleteView,
     DetailView,
   )
+  
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.conf import settings
@@ -124,9 +125,8 @@ class NeuesWortschatzCreateView(LoginRequiredMixin, CreateView):
 
     def get_initial(self):
         user = self.request.user
-        print(user)
         """
-            Consulta as preferências do usuário para pegar os idiomas de estudo e a conhecida.
+            Consulta as preferências do usuário para pegar os idiomas de estudo e a conhecido.
         """
         try:
             benutzervorgaben = Benutzervorgaben.objects.get(user=user)

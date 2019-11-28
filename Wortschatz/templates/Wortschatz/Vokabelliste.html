@@ -7,23 +7,23 @@
   <h3>Vocabulário</h3>
 </header>
 <section class="">
+  <header class="row">
+    <div class="col-1 btn">
+      <a href="{% url 'Wortschatz:neuesWortschatz' %}" class="">+</a>
+    </div>
+    <div class="col-3">
+      <b>Vocábulo</b>
+    </div>
+    <div class="col-3">
+      <b>Tradução</b>
+    </div>
+    <div class="col-4">
+      <b>Imagem</b>
+    </div>
+    <div class="col-1">
+    </div>
+  </header>
   {% if object_list %}
-    <header class="row">
-      <div class="col-1 btn">
-        <a href="{% url 'Wortschatz:neuesWortschatz' %}" class="">+</a>
-      </div>
-      <div class="col-3">
-        <b>Vocábulo</b>
-      </div>
-      <div class="col-3">
-        <b>Tradução</b>
-      </div>
-      <div class="col-4">
-        <b>Imagem</b>
-      </div>
-      <div class="col-1">
-      </div>
-    </header>
     {% for Wort in object_list %}
       <div class="row">
         <div class="col-1 bnt">
@@ -40,6 +40,11 @@
         </picture>
         <div class="col-1">
           <a href="{% url 'Wortschatz:Wortschatzloschen' Wort.pk %}">X</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <hr>
         </div>
       </div>
     {% endfor %}

@@ -38,11 +38,11 @@
         <a class="nav-link" href="#">Opção 1</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="{% url 'ausbildung:index' %}">Treino</a>
       </li>
   {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href=" {% url 'Wortschatz:index' %} ">Vocabulário</a>
+        <a class="nav-link" href=" {% url 'Wortschatz:index' %}">Vocabulário</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href=" {% url 'Wortschatz:Benutzervorgabenechseln' %} ">Preferências</a>

@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('Zugriff/', include(('Zugriff.urls','Zugriff'), namespace='Zugriff')),
     path('Wortschatz/', include(('Wortschatz.urls','Wortschatz'), namespace='Wortschatz')),
+    path('ausbildung/', include(('ausbildung.urls', 'ausbildung'), namespace='ausbildung')),
 ]
 
 if settings.DEBUG:

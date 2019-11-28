@@ -1,0 +1,35 @@
+{% extends "ausbildung/index.html" %}
+
+{% load widget_tweaks %}
+
+{% block Titel %}{{ block.super }} - Cadastro de Países{% endblock %}
+
+{% block ausbildung_Inhalt %}
+<header>
+  <h3>Perguntas</h3>
+</header>
+<section>
+  {% for Antworte in object_list %}
+  <div class="row">
+    <div class="col-md-4">
+      {{Antworte.Fragetext}}
+    </div>
+    <div class="col-md-3">
+      {{Antworte.Antwort}}
+    </div>
+    <div class="col-md-2">
+      {% if Antworte.ist_richtig %}
+          Acertou
+      {% else %}
+          Errou
+      {% endif %}
+    </div>
+    <div class="col-md-3">
+      {{ Antworte.Zeit }}
+    </div>
+  </div>
+  {% endfor %}
+
+</section>
+
+{% endblock %}

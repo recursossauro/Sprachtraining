@@ -1,0 +1,23 @@
+{% extends "Basis.html" %}
+
+{% block Titel %} {{ block.super }} - Treino{% endblock %}
+
+{% block Inhalt %}
+<header>
+  <h2>Treino de Vocabulário</h2>
+</header>
+<article class="row">
+    <div class="col-md-2">
+        <div class="list-group">
+          <a href="{% url 'ausbildung:index' %}" class="list-group-item active">Treino de Vocabulário</a>
+          <a href="{% url 'ausbildung:ubersetzen' %}" class="list-group-item active">Simples</a>
+          <a href="{% url 'ausbildung:Antworten' %}" class="list-group-item active">Desempenho</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+      {% block ausbildung_Inhalt %}
+
+      {% endblock %}
+    </div>
+</article>
+{% endblock %}

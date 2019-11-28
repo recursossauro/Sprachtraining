@@ -94,7 +94,8 @@ class Wortschatz(models.Model):
     modified = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
-        verbose_name = 'Vocabulário'
+        unique_together = ('user', 'sprache', 'sprachetraining', 'ubersetzung', 'wort')
+        verbose_name    = 'Vocabulário'
         verbose_name_plural = 'Vocabulários'
 
     def get_absolute_url(self):
@@ -102,3 +103,9 @@ class Wortschatz(models.Model):
 
     def __str__(self):
         return self.wort
+
+"""
+    Classe n para n Classe de vocabulário
+    O primeiro vocabulário é a Classe.
+    O segundo vocabulário pertence àquela Classe
+"""
