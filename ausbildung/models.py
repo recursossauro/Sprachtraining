@@ -96,6 +96,19 @@ class Frage(models.Model):
         #i = randint(0, fragen.count()-1)
         #return fragen[i]
 
+    def zufalligFragemitGewichten(user, sprache, sprachetraining, AnzahlFragen=10):
+
+        #hochste = Wortschatz.objects.filter(user=user, sprache=sprache, sprachetraining = sprachetraining).aggregate(max_id=Max("id"))['max_id']
+        Worte          = Wortschatz.objects.filter(user=user, sprache=sprache, sprachetraining = sprachetraining, frage__isnull=True)
+        Fragen         = Frage.objects.filter(Wortschatz__user=user, Wortschatz__sprache=sprache, Wortschatz__sprachetraining = sprachetraining)
+        AnzahlWorte    = Worte.count()
+        AnzahlFragen   = Fragen.count()
+        AnzahlFragetyp = len(Frage.FRAGETYP_OPTIONEN)
+
+        Gewichten = []
+
+
+
 class Antwort(models.Model):
 
     Frage     = models.ForeignKey(Frage, verbose_name='Questão', on_delete=models.CASCADE)
