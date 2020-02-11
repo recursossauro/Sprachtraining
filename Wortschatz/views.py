@@ -7,7 +7,7 @@ from django.views.generic import (
     DeleteView,
     DetailView,
   )
-  
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.conf import settings
@@ -149,3 +149,6 @@ class WortschatzloschenDeleteView(DeleteView):
     model = Wortschatz
     template_name = 'Wortschatz/Wortschatzloschen.html'
     success_url = reverse_lazy('Wortschatz:Vokabelliste')
+
+class ZahltWorterTemplateView(LoginRequiredMixin, TemplateView):
+    template_name = 'Wortschatz/zahltWorter.html'

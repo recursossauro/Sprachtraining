@@ -20,7 +20,7 @@
       {% for field in form.hidden_fields %}
         {{ field }}
       {% endfor %}
-      {% for field in form.visible_fields %}
+      {% for field in form.visible_fields" %}
         <div class="form-group{% if field.errors %} has-error {% endif %}">
           <label for="{{ field.auto_id }}" class="col-md-12 control-label">{{ Frage }}</label>
           <div class="col-md-12">
@@ -39,28 +39,35 @@
     </fieldset>
   </form>
 </section>
-<aside class="row {% if Antwort.ist_richtig %}.bg-success{% else %}.bg-danger{% endif %}">
-  <div class="col-md-6">
-    {{ Antwort.Fragetext }} {{ Antwort.Antwort }}
-  </div>
-  <div class="col-md-5">
-    tempo de resposta: {{ Antwort.Zeit }}
-  </div>
-  {% if Antwort.ist_richtig %}
-    <div class="col-md-4">
-      Correto!
+{% if Antwort %}
+  <aside class="{% if Antwort.ist_richtig %}bg-success{% else %}bg-danger{% endif %}">
+    <div class="row">
+      {% if Antwort.ist_richtig %}
+        <div class="col-md-3">
+          Correto!
+        </div>
+      {% else %}
+        <div class="col-md-3">
+          Errado!
+        </div>
+      {% endif %}
+      <div class="col-md-6">
+        {{ Antwort.Fragetext }} <b>{{ Antwort.Antwort }}</b>
+      </div>
+      <div class="col-md-3">
+        tempo: {{ Antwort.Zeit }}
+      </div>
     </div>
-  {% else %}
-    <div class="col-md-3">
-      Errado!
-    </div>
-    <div class="col-md-3">
-      <b>Resposta certa:</b>
-    </div>
-    <div class="col-md-9">
-      {{ Antwort.Frage.Wortschatz.wort }} = {{ Antwort.Frage.Wortschatz.ubersetzung }}
-    </div>
-  {% endif %}
-</aside>
-
+    {% if not Antwort.ist_richtig %}
+      <div class="row">
+        <div class="col-md-3">
+          <b>Resposta certa:</b>
+        </div>
+        <div class="col-md-9">
+          {{ Antwort.Frage.Wortschatz.wort }} = {{ Antwort.Frage.Wortschatz.ubersetzung }}
+        </div>
+      </div>
+    {% endif %}
+  </aside>
+{% endif %}
 {% endblock %}

@@ -13,6 +13,7 @@ from .views import (
     # Wortschatz
     BenutzervorgabenCreateView, BenutzervorgabenUpdateView, BenutzervorgabenDetailView,
     NeuesWortschatzCreateView, WortschatzDetailView, WortschatzListView, AndernWortschatzUpdateView, WortschatzloschenDeleteView,
+    ZahltWorterTemplateView,
     )
 
 urlpatterns = [
@@ -38,5 +39,7 @@ urlpatterns = [
     path('neuesWortschatz/', NeuesWortschatzCreateView.as_view(), name='neuesWortschatz'),
     path('<int:pk>/andernWortschatz/', AndernWortschatzUpdateView.as_view(), name='andernWortschatz'),
     path('<int:pk>/Wortschatzloschen/', WortschatzloschenDeleteView.as_view(), name='Wortschatzloschen'),
+    #
+    path('zahltWorter/', ZahltWorterTemplateView.as_view(), name='zahltWorter'),
 
 ]

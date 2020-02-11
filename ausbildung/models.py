@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from datetime import datetime
-from random import randint
+from random import randint, choices
 
 from Zugriff.models import User
 from Wortschatz.models import Wortschatz
@@ -98,16 +98,49 @@ class Frage(models.Model):
 
     def zufalligFragemitGewichten(user, sprache, sprachetraining, AnzahlFragen=10):
 
-        #hochste = Wortschatz.objects.filter(user=user, sprache=sprache, sprachetraining = sprachetraining).aggregate(max_id=Max("id"))['max_id']
-        Worte          = Wortschatz.objects.filter(user=user, sprache=sprache, sprachetraining = sprachetraining, frage__isnull=True)
-        Fragen         = Frage.objects.filter(Wortschatz__user=user, Wortschatz__sprache=sprache, Wortschatz__sprachetraining = sprachetraining)
-        AnzahlWorte    = Worte.count()
-        AnzahlFragen   = Fragen.count()
-        AnzahlFragetyp = len(Frage.FRAGETYP_OPTIONEN)
+        AnzahlFragetyp              = len(Frage.FRAGETYP_OPTIONEN)
+        WorteohneFragen             = Wortschatz.objects.filter(user=user, sprache=sprache, sprachetraining = sprachetraining, frage__isnull=True)
+        Fragen                      = Frage.objects.filter(Wortschatz__user=user, Wortschatz__sprache=sprache, Wortschatz__sprachetraining = sprachetraining).order_by('Wortschatz')
+        AnzahlWorte                 = WorteohneFragen.count()
+        AnzahlFragen                = Fragen.count()
 
         Gewichten = []
+        alleFragen_pk = []
 
 
+        for Wort in WorteohneFragen:
+            fen = Frage.FragenErstellen(Wort)
+            for f in fen:
+                alleFragen_pk.append(f.pk)
+                Gewichten.append(f.Zufallsfaktor)
+        f = None
+        for frage in Fragen:
+            alleFragen_pk.append(frage.pk)
+            Gewichten.append(frage.Zufallsfaktor)
+            if not f:
+                f = frage
+                Hilfs = [f.Fragetyp]
+            elif f and f.Wortschatz == frage.Wortschatz:
+                Hilfs += [frage.Fragetyp]
+                f = frage
+            else:
+                # Verificar quais Fragetyp faltam comparando os conjuntos de frage.Wortschatz iguais;
+                # Cria as Frages dos tipos que faltam;
+                # Alimenta alleFragen e Gewindchten
+                for typ in Frage.FRAGETYP_OPTIONEN:
+                    if typ[0] not in Hilfs:
+                        frage__ = Frage(frage.Wortschatz, typ[0])
+                        frage__.save()
+                        alleFragen_pk.append(frage__.pk)
+                        Gewichten.append(frage__.Zufallsfaktor)
+                # Reiniciar as variáveis
+                f = frage
+                Hilfs = [f.Fragetyp]
+
+        return choices(alleFragen_pk,  weights=Gewichten, k=AnzahlFragen)
+
+    def __str__(self):
+        return self.getFrage()
 
 class Antwort(models.Model):
 
@@ -139,9 +172,13 @@ class Antwort(models.Model):
         self.Fragetext = self.Frage.getFrage()
 
         if self.ist_richtig():
-            if (self.Frage.Zufallsfaktor>1): self.Frage.Zufallsfaktor -= 1
+            if (self.Frage.Zufallsfaktor>1):
+                self.Frage.Zufallsfaktor -= 1
+                self.Frage.save()
         else:
-            if (self.Frage.Zufallsfaktor<10): self.Frage.Zufallsfaktor += 1
+            if (self.Frage.Zufallsfaktor<10):
+                self.Frage.Zufallsfaktor += 1
+                self.Frage.save()
 
         super(Antwort, self).save(*args, **kwargs)
 

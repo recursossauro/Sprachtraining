@@ -4,6 +4,7 @@ from .models import Antwort
 
 class UbersetzenModelForm(forms.ModelForm):
 
+
     class Meta():
         model = Antwort
         fields = ['Antwort', 'Frage', 'begann']

@@ -7,9 +7,9 @@
   <h3>Vocabulário</h3>
 </header>
 <section class="">
-  <header class="row">
+  <div class="row">
     <div class="col-1 btn">
-      <a href="{% url 'Wortschatz:neuesWortschatz' %}" class="">+</a>
+      <a href="{% url 'Wortschatz:neuesWortschatz' %}" class=""><i class="fas fa-file"></i></a>
     </div>
     <div class="col-3">
       <b>Vocábulo</b>
@@ -22,12 +22,17 @@
     </div>
     <div class="col-1">
     </div>
-  </header>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
   {% if object_list %}
     {% for Wort in object_list %}
       <div class="row">
         <div class="col-1 bnt">
-          <a href="{% url 'Wortschatz:andernWortschatz' Wort.pk %}">A</a>
+          <a href="{% url 'Wortschatz:andernWortschatz' Wort.pk %}"><i class="fas fa-pencil-alt"></i></a>
         </div>
         <div class="col-3">
           <a href=" {% url 'Wortschatz:Wortschatz' Wort.pk %} ">{{ Wort.wort }}</a>
@@ -39,7 +44,7 @@
           {% if Wort.bild %}<img src="{{Wort.bild.url}}" alt="Wort.wort" style="max-width:100px;">{% endif %}
         </picture>
         <div class="col-1">
-          <a href="{% url 'Wortschatz:Wortschatzloschen' Wort.pk %}">X</a>
+          <a href="{% url 'Wortschatz:Wortschatzloschen' Wort.pk %}"><i class="fas fa-eraser"></i></a>
         </div>
       </div>
       <div class="row">

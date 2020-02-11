@@ -26,17 +26,30 @@ nav a {
 }
 
 header {
+  border: 5px solid #2b2414;
   background-color: #2b2414;
   color: #a78314;
+  border-radius: 15px;
 }
 
-header h1, h2 {
+header, h1, h2 {
   text-align: center;
+}
+
+
+.beige {
+  background-color: rgba(240, 227, 198,0.6);
+  border-radius: 25px;
+  padding: 5px;
+}
+
+.senf {
+  background-color: #a78314;
 }
 
 /*
 Cores
-  #f0e3c6 Bege clarinho
+  #f0e3c6 Bege clarinho em decimal fica: 240, 227, 198
   #2b2414 Marrom escuro
   #a78314 Mostarda;
   #2e0f15 Sienna Escuro
