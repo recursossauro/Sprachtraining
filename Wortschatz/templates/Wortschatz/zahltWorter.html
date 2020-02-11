@@ -1,0 +1,62 @@
+{% extends "Wortschatz/index.html" %}
+
+{% load widget_tweaks %}
+
+{% block Titel %}Exclusão de Vocábulo{% endblock %}
+
+{% block Wortschatz_Inhalt %}
+<script type="text/javascript">
+  function contar() {
+    campoTexto = document.getElementById("texto");
+    resultado = document.getElementById("resultado");
+    Wort = '';
+    Worte = {};
+    for (i=0; i<campoTexto.value.length; i++) {
+      letra = campoTexto.value[i];
+      if (
+        letra != ' ' && letra != '.' && letra != ',' && letra != ';' &&
+        letra != ':' && letra != '!' && letra != '?' && letra != '"' &&
+        letra != '+' && letra != '=' && letra != '_' && letra != '@'
+      )
+        Wort += letra.toLowerCase();
+      else if (Wort) {
+        Worte[Wort] = (Worte.hasOwnProperty(Wort)?Worte[Wort]+1:1);
+        Wort = '';
+      }
+      /*Lista as palavras com os números*/
+      /*for (i=0; i<Worte.length; i++) {
+        resultado.innerHTML += Worte[i] + '<br/>';
+      }*/
+
+    }
+    for (var Wort in Worte) {
+      resultado.innerHTML += Wort + "(" +Worte[Wort]+')</br> ';
+    }
+  }
+</script>
+<header>
+  <h3>Conta Palavras</h3>
+</header>
+<section>
+  <article class="">
+    <p>Copiar e colar no campo o texto desejado.</p>
+    <p>A ferramenta mostrará quais palavras foram mais usadas no texto, sendo elas as mais promissoras para o trêino de vocabulário.</p>
+  </article>
+  <article class="">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <textarea id="texto" rows="10" cols="80"></textarea>
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <button type="button" class="btn btn-primary" onclick="contar();">Contar</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </article>
+  <article class="" id="resultado">
+
+  </article>
+</section>
+
+{% endblock %}

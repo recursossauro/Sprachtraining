@@ -1,0 +1,57 @@
+{% extends "ausbildung/index.html" %}
+
+{% load widget_tweaks %}
+
+{% block Titel %}{{ block.super }} - Cadastro de Países{% endblock %}
+
+{% block ausbildung_Inhalt %}
+
+<script>
+
+</script>
+
+<header>
+  <h3>Perguntas</h3>
+</header>
+<section>
+  {% if Antwort.pk %}
+  <div class="">
+    {% if Antwort.ist_richtig %}
+      Acertou!!!
+    {% else %}
+      Errou.
+    {% endif %}
+  </div>
+  {% endif %}
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    {% endfor %}
+    <fieldset>
+      {% for field in form.hidden_fields %}
+        {{ field }}
+      {% endfor %}
+
+      {% for field in form.visible_fields %}
+        <div class="form-group{% if field.errors %} has-error {% endif %}">
+          <label for="{{ field.auto_id }}" class="col-md-12 control-label">{{ Frage }}</label>
+          <div class="col-md-12">
+            {% render_field field|attr:"autofocus" class="form-control" %}
+            {% for error in field.errors %}
+              <span class="help-block">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}
