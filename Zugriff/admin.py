@@ -3,9 +3,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import User
+# from .models import User
+
+from django.contrib.auth import get_user_model
+
 from .forms import UserAdminCreationForm, UserAdminForm
 
+User = get_user_model()
 
 class UserAdmin(BaseUserAdmin):
 
@@ -21,7 +25,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('username', 'email')
         }),
         ('Informações Básicas', {
-            'fields': ('name', 'last_login')
+            'fields': ('first_name', 'last_login')
         }),
         (
             'Permissões', {
@@ -35,4 +39,4 @@ class UserAdmin(BaseUserAdmin):
     list_display = ['username', 'name', 'email', 'is_active', 'is_staff', 'date_joined']
 
 
-admin.site.register(User, UserAdmin)
+#admin.site.register(User, UserAdmin)

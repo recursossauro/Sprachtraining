@@ -4,7 +4,10 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 
-from Zugriff.models import User
+# from Zugriff.models import User
+# from django.contrib.auth import get_user_model
+
+# User = get_user_model()
 
 class Land(models.Model):
     name = models.CharField('Nome', max_length = 100, unique=True)

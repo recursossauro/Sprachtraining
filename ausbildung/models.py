@@ -4,8 +4,12 @@ from django.urls import reverse
 from datetime import datetime
 from random import randint, choices
 
-from Zugriff.models import User
+# from Zugriff.models import User
+#from django.contrib.auth import get_user_model
+
 from Wortschatz.models import Wortschatz
+
+#User = get_user_model()
 
 class Frage(models.Model):
 
